@@ -5,7 +5,7 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.1.0
+		* Version	: 4.2.0
 		
 		
 		Add_Image_WaterMark			=> $imageage_path, $watermark_path, $new_image_path = '', $mright = 0, $mbottom = 10
@@ -21,9 +21,9 @@
 		Encode 						=> $string
 		Persian_To_English_Num		=> $Number
 		Get_Date_Last_Days			=> $days, $format = 'Y-m-d'
-		Get_Content 				=> $URL
+		Get_Content 				=> $URL, $Using = 'CURL', $URL_Decode = True
 		Get_Excerpt 				=> $str, $startPos=0, $maxLength=100, $With_etc = true
-		Get_Json 					=> $URL
+		Get_JSON 					=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
 		Get_Remote_Image_Size		=> $URL
 		Get_Shamsi_Date 			=> $mod = DIRECTORY_SEPARATOR, $time2 = false, $leading_zero = true
 		Get_URL_FileName 			=> $URL
@@ -391,26 +391,65 @@
 			return FALSE;
 		}
 		
-		Public Function Get_Json( $URL, $URL_Decode = true ) {
-			if ( $URL_Decode ) { $URL = urldecode($URL); }
+		Public Function Get_JSON( $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True ) {
 			
-			$arrContextOptions= array( "ssl" => array( "verify_peer"=>false, "verify_peer_name"=>false ) );
+			$JText = $this->Get_Content( $URL, $Using, $URL_Decode );
 			
-			$jtext = @file_get_contents($URL, false, stream_context_create($arrContextOptions));
+			IF ( !Empty($JText) And $this->Is_Json($JText) ) {
+				Return JSON_Decode($JText, $In_Array);
+			}
 			
-			if ( empty($jtext) ) { return false; } else { $jobj = @json_decode($jtext); }
-			
-			return $jobj;
+			Return False;
 		}
 		
-		Public Function Get_Content( $URL, $URL_Decode = true ) {
-			if ( $URL_Decode ) { $URL = urldecode($URL); }
+		Public Function Get_Content( $URL, $Using = 'CURL', $URL_Decode = True ) {
+			// $Using : FGC , CURL
 			
-			$arrContextOptions= array( "ssl" => array("verify_peer" => false, "verify_peer_name" => false) );
+			IF ( $URL_Decode ) { $URL = URLDeCode($URL); }
 			
-			$content = @file_get_contents($URL, false, stream_context_create($arrContextOptions));
+			$Content = '';
 			
-			if ( empty($content) ) { return false; } else { return $content; }
+			IF ( $Using == 'FGC' ) {
+				
+				$ContextOptions= Array(
+					"ssl" => Array(
+							"verify_peer"		=> False,
+							"verify_peer_name"	=> False
+					)
+				);
+				
+				$Content = @File_Get_Contents($URL, False, Stream_Context_Create($ContextOptions));
+				
+			} ElseIF ( $Using == 'CURL' ) {
+				
+				$User_Agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
+				
+				$COptions = Array(
+					CURLOPT_CUSTOMREQUEST	=> "GET",
+					CURLOPT_POST			=> False,
+					CURLOPT_USERAGENT		=> $User_Agent,
+					CURLOPT_COOKIEFILE		=> "Cookie.txt",
+					CURLOPT_COOKIEJAR		=> "Cookie.txt",
+					CURLOPT_RETURNTRANSFER	=> True,
+					CURLOPT_HEADER			=> False,
+					CURLOPT_FOLLOWLOCATION	=> True,
+					CURLOPT_ENCODING		=> "",
+					CURLOPT_AUTOREFERER		=> True,
+					CURLOPT_CONNECTTIMEOUT	=> 120,
+					CURLOPT_TIMEOUT			=> 1200,
+					CURLOPT_MAXREDIRS		=> 10,
+				);
+				
+				$CURL 		= CURL_INIT($URL);
+				CURL_SetOPT_Array( $CURL, $COptions );
+				$Content 	= CURL_Exec($CURL);
+				CURL_Close($CURL);
+				
+			}
+			
+			IF ( !Empty($Content) ) { Return $Content; }
+			
+			Return False;
 		}
 		
 		Public Function Remove_Special_Chars( $in_string, $space_to = false ) {
