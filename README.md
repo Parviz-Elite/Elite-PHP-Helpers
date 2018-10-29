@@ -11,9 +11,9 @@
 		Build_Indexed_File_Path	=> $Path, $FileName
 		Build_Token 			=> $String, $build_salt = true
 		Check_Len			=> $String, $min, $max
-		Clear_Get_Vars 			=> $string, $remove_ls = False
+		Clear_Get_Vars 		=> $string, $remove_ls = False
 		Correct_Iran_Phone		=> $uNumber
-		Decode 				=> $String
+		Decode 			=> $String
 		Delete_Cookie			=> $Cookie_Name
 		Download_Remote_File 		=> $Remote_File, $Local_Path
 		Encode 				=> $String
