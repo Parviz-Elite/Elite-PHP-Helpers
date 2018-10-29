@@ -16,7 +16,7 @@
 		Decode 			=> $String
 		Delete_Cookie			=> $Cookie_Name
 		Download_Remote_File 		=> $Remote_File, $Local_Path
-		ncode 				=> $String
+		Encode 			=> $String
 		Persian_To_English_Num	=> $Number
 		Get_Date_Last_Days		=> $days, $format = 'Y-m-d'
 		Get_Content 			=> $URL, $Using = 'CURL', $URL_Decode = True
