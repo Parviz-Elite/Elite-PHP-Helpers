@@ -5,7 +5,7 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.2.0
+		* Version	: 4.5.0
 		
 		
 		Add_Image_WaterMark			=> $imageage_path, $watermark_path, $new_image_path = '', $mright = 0, $mbottom = 10
@@ -25,10 +25,10 @@
 		Get_Excerpt 				=> $str, $startPos=0, $maxLength=100, $With_etc = true
 		Get_JSON 					=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
 		Get_Remote_Image_Size		=> $URL
-		Get_Shamsi_Date 			=> $mod = DIRECTORY_SEPARATOR, $time2 = false, $leading_zero = true
+		Get_Shamsi_Date 			=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
 		Get_URL_FileName 			=> $URL
 		Input_Check					=> $Title, $Val, $minL = 1, $maxL = 1, $Is_Num = false, $Is_Mail = false, $Is_Latin = false
-		Is_Json						=> $string
+		Is_Json						=> $String
 		Is_Number 					=> $input_string
 		Is_Session_Started			=> Null
 		Load_CSS 					=> $css_path
@@ -36,19 +36,20 @@
 		Load_JS 					=> $js_path
 		Miladi_To_Shamsi 			=> $gy, $gm, $gd, $mod='', $time2 = false, $leading_zero = false
 		English_To_Persian_num		=> $Number
-		Post_Redirect				=> $url, $data
-		Rand_Num					=> $len
+		Post_Redirect				=> $URL, $Data = []
+		Post_Request				=> $URL, $Data, $Is_JSON = False, $Extra_HTTP_Headers = []
+		Rand_Num					=> $Len
 		Rand_Number					=> $min_num_count = 2, $max_num_count = 4, $min_len = 5, $max_len = 8
-		Rand_Str					=> $len
+		Rand_Str					=> $Len
 		Read_File_To_Array			=> $File_Path
-		Redirect					=> $url
+		Redirect					=> $URL
 		Remove_Char					=> $string, $char, $rem_with = ''
 		Remove_All_Special_Chars 	=> $in_string, $protocols_2 = false
 		Remove_Special_Chars		=> $in_string, $space_to = false
 		Replace_Once				=> $Search, $Replace, $String
 		Set_Cookie					=> $Cookie_Name, $Cookie_Value, $Cookie_Days = '30'
 		Start_Session				=> Null
-		Text_Has_String 			=> $text, $string
+		Text_Has_String 			=> $Text, $String
 	*/
 	
 	NameSpace ParvizTurk\Elite_Helpers;
@@ -267,10 +268,10 @@
 			return $Err_Msg;
 		}
 		
-		Public Function Rand_Str( $len = 15 ) {
+		Public Function Rand_Str( $Len = 15 ) {
 			$rnd_str = '';
 			$temp_int = $rnd_status = 1;
-			for ($i = 1; $i <= $len; $i++) {
+			for ($i = 1; $i <= $Len; $i++) {
 				switch ($rnd_status) {
 					case 1:
 						$temp_int = rand(97, 122);
@@ -289,10 +290,10 @@
 			return $rnd_str;
 		}
 		
-		Public Function Rand_Num( $len = 15 ) {
+		Public Function Rand_Num( $Len = 15 ) {
 			$rnd_num = '';
 			$temp_int = 1;
-			for ($i = 1; $i <= $len; $i++) {
+			for ($i = 1; $i <= $Len; $i++) {
 				$temp_int = rand(48, 57);
 				$rnd_num .= chr($temp_int);
 			}
@@ -300,16 +301,16 @@
 			return $rnd_num;
 		}
 		
-		Public Function Redirect( $url ) {
+		Public Function Redirect( $URL ) {
 			if( !headers_sent() ) {
-				header('Location: ' . $url, true, 302);
+				header('Location: ' . $URL, true, 302);
 				die();
 			} else {
 				echo '<script type="text/javascript">';
-				echo 'window.location.href="'.$url.'";';
+				echo 'window.location.href="' . $URL . '";';
 				echo '</script>';
 				echo '<noscript>';
-				echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+				echo '<meta http-equiv="refresh" content="0;url=' . $URL . '" />';
 				echo '</noscript>';
 				die();
 			}
@@ -422,7 +423,7 @@
 				
 			} ElseIF ( $Using == 'CURL' ) {
 				
-				$User_Agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
+				$User_Agent='Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0';
 				
 				$COptions = Array(
 					CURLOPT_CUSTOMREQUEST	=> "GET",
@@ -452,6 +453,55 @@
 			Return False;
 		}
 		
+		Public Function Post_Request( $URL, $Data, $Is_JSON = False, $Extra_HTTP_Headers = [] ) {
+			$User_Agent='Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0';
+			
+			$PostVars = '';
+			
+			IF ( Is_Array($Data) ) { $PostVars = HTTP_Build_Query($Data); } Else { $PostVars = $Data; }
+			
+			$HTTP_Headers[] = 'Content-Length: ' . MB_STRLen($PostVars);
+			
+			IF ( $Is_JSON ) {
+				$HTTP_Headers[] = 'Content-Type: application/json';
+			} Else {
+				$HTTP_Headers[] = 'Content-Type: x-www-form-urlencoded';
+			}
+			
+			IF ( !Empty($Extra_HTTP_Header) ) {
+				Array_Push( $HTTP_Headers, $Extra_HTTP_Headers );
+			}
+			
+			$COptions = Array(
+				CURLOPT_POST			=> True,
+				CURLOPT_POSTFIELDS		=> $PostVars,
+				CURLOPT_USERAGENT		=> $User_Agent,
+				CURLOPT_COOKIEFILE		=> "Cookie.txt",
+				CURLOPT_COOKIEJAR		=> "Cookie.txt",
+				CURLOPT_RETURNTRANSFER	=> True,
+				CURLOPT_HEADER			=> False,
+				CURLOPT_FOLLOWLOCATION	=> True,
+				CURLOPT_ENCODING		=> "",
+				CURLOPT_AUTOREFERER		=> True,
+				CURLOPT_CONNECTTIMEOUT	=> 120,
+				CURLOPT_TIMEOUT			=> 1200,
+				CURLOPT_MAXREDIRS		=> 10,
+				CURLOPT_HTTPHEADER		=> $HTTP_Headers
+			);
+			
+			$CURL 		= CURL_INIT($URL);
+			CURL_SetOPT_Array( $CURL, $COptions );
+			$Content 	= CURL_Exec($CURL);
+			CURL_Close($CURL);
+			
+			IF ( !Empty($Content) ) {
+				IF ( $this->Is_Json($Content) ) { $Content = JSON_Decode($Content); }
+				Return $Content;
+			}
+			
+			Return False;
+		}
+		
 		Public Function Remove_Special_Chars( $in_string, $space_to = false ) {
 			$pattern = array('’', '‘', '!', '@', '#', '$', '%', '^', '*', '&', '(', ')', '+', '=', ',', '<', '>', '{', '}', '[', ']', '?', chr(34), chr(92));
 			$res_string = str_replace($pattern, '', $in_string);
@@ -472,8 +522,8 @@
 			return $res_string;
 		}
 		
-		Public Function Text_Has_String( $text, $string ) {
-			if (strpos($text, $string) !== false) {
+		Public Function Text_Has_String( $Text, $String ) {
+			if (strpos($Text, $String) !== false) {
 				return true;
 			} else {
 				return false;
@@ -604,17 +654,17 @@
 				$resret .= ' ' . date('H:i:s');
 			}
 			
-			return $resret;
+			Return $resret;
 		}
 		
-		Public Function Get_Shamsi_Date( $mod = DIRECTORY_SEPARATOR, $time2 = false, $leading_zero = true ) {
-			$sdate = $this->Miladi_To_Shamsi( date('Y'), date('m'), date('d'), $mod, $time2, $leading_zero );
-			return $sdate;
+		Public Function Get_Shamsi_Date( $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_Zero = True ) {
+			$SDate = $this->Miladi_To_Shamsi( Date('Y'), Date('m'), Date('d'), $MOD, $Time2, $Leading_Zero );
+			Return $SDate;
 		}
 		
-		Public Function Is_Json( $string ) {
-			json_decode($string);
-			return (json_last_error() == JSON_ERROR_NONE);
+		Public Function Is_Json( $String ) {
+			Json_Decode($String);
+			Return (Json_Last_Error() == JSON_ERROR_NONE);
 		}
 		
 		Function __construct() {
