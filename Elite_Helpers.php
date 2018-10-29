@@ -5,7 +5,7 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.7.0
+		* Version	: 4.8.0
 		
 		
 		Add_Image_WaterMark			=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
@@ -465,7 +465,7 @@
 			IF ( $Is_JSON ) {
 				$HTTP_Headers[] = 'Content-Type: application/json';
 			} Else {
-				$HTTP_Headers[] = 'Content-Type: x-www-form-urlencoded';
+				$HTTP_Headers[] = 'Content-Type: application/x-www-form-urlencoded';
 			}
 			
 			IF ( !Empty($Extra_HTTP_Header) ) {
