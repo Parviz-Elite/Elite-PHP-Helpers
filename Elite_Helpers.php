@@ -5,36 +5,36 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.5.0
+		* Version	: 4.7.0
 		
 		
-		Add_Image_WaterMark			=> $imageage_path, $watermark_path, $new_image_path = '', $mright = 0, $mbottom = 10
-		Add_Text_Watermark			=> $img_path, $wm_text
+		Add_Image_WaterMark			=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
+		Add_Text_Watermark			=> $img_Path, $wm_text
 		Build_Indexed_File_Path		=> $Path, $FileName
 		Build_Token 				=> $String, $build_salt = true
 		Check_Len					=> $String, $min, $max
-		Clear_Get_Vars 				=> $string, $remove_ls = false
+		Clear_Get_Vars 				=> $string, $remove_ls = False
 		Correct_Iran_Phone			=> $uNumber
-		Decode 						=> $string
+		Decode 						=> $String
 		Delete_Cookie				=> $Cookie_Name
 		Download_Remote_File 		=> $Remote_File, $Local_Path
-		Encode 						=> $string
+		Encode 						=> $String
 		Persian_To_English_Num		=> $Number
 		Get_Date_Last_Days			=> $days, $format = 'Y-m-d'
 		Get_Content 				=> $URL, $Using = 'CURL', $URL_Decode = True
-		Get_Excerpt 				=> $str, $startPos=0, $maxLength=100, $With_etc = true
+		Get_Excerpt 				=> $Str, $startPos=0, $maxLength=100, $With_etc = true
 		Get_JSON 					=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
 		Get_Remote_Image_Size		=> $URL
 		Get_Shamsi_Date 			=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
 		Get_URL_FileName 			=> $URL
-		Input_Check					=> $Title, $Val, $minL = 1, $maxL = 1, $Is_Num = false, $Is_Mail = false, $Is_Latin = false
+		Input_Check					=> $Title, $Val, $minL = 1, $maxL = 1, $Is_Num = False, $Is_Mail = False, $Is_Latin = False
 		Is_Json						=> $String
-		Is_Number 					=> $input_string
+		Is_Number 					=> $Input_String
 		Is_Session_Started			=> Null
-		Load_CSS 					=> $css_path
-		Load_File 					=> $file_path, $show_message = true
-		Load_JS 					=> $js_path
-		Miladi_To_Shamsi 			=> $gy, $gm, $gd, $mod='', $time2 = false, $leading_zero = false
+		Load_CSS 					=> $css_Path
+		Load_File 					=> $file_Path, $show_message = true
+		Load_JS 					=> $js_Path
+		Miladi_To_Shamsi 			=> $gy, $gm, $gd, $mod='', $time2 = False, $leading_zero = False
 		English_To_Persian_num		=> $Number
 		Post_Redirect				=> $URL, $Data = []
 		Post_Request				=> $URL, $Data, $Is_JSON = False, $Extra_HTTP_Headers = []
@@ -43,9 +43,9 @@
 		Rand_Str					=> $Len
 		Read_File_To_Array			=> $File_Path
 		Redirect					=> $URL
-		Remove_Char					=> $string, $char, $rem_with = ''
-		Remove_All_Special_Chars 	=> $in_string, $protocols_2 = false
-		Remove_Special_Chars		=> $in_string, $space_to = false
+		Remove_Char					=> $String, $char, $rem_with = ''
+		Remove_All_Special_Chars 	=> $in_string, $protocols_2 = False
+		Remove_Special_Chars		=> $in_string, $space_to = False
 		Replace_Once				=> $Search, $Replace, $String
 		Set_Cookie					=> $Cookie_Name, $Cookie_Value, $Cookie_Days = '30'
 		Start_Session				=> Null
@@ -57,97 +57,97 @@
 	Class Helpers {
 		
 		Public Function Replace_Once( $Search, $Replace, $String ) {
-			$Search = '/'. preg_quote($Search, '/') . '/';
+			$Search = '/'. PReg_Quote($Search, '/') . '/';
 			
 			Return Preg_Replace($Search, $Replace, $String, 1);
 		}
 		
-		Public Function Add_Image_WaterMark( $imageage_path, $watermark_path, $new_image_path = '', $mright = 0, $mbottom = 10 ) {
-			$image = @imagecreatefromjpeg( $imageage_path );
-			if ( $image === false ) { $image = @imagecreatefrompng( $imageage_path ); }
-			if ( $image === false ) { return false; }
+		Public Function Add_Image_WaterMark( $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10 ) {
+			$Image = @ImageCreateFromJPEG( $Image_Path );
+			IF ( $Image === False ) { $Image = @ImageCreateFromPNG( $Image_Path ); }
+			IF ( $Image === False ) { Return False; }
 			
-			$wmark = @imagecreatefrompng( $watermark_path );
-			if ( $wmark === false ) { $wmark = @imagecreatefromjpeg( $imageage_path ); }
-			if ( $wmark === false ) { return false; }
+			$wmark = @ImageCreateFromPNG( $WaterMark_Path );
+			IF ( $wmark === False ) { $wmark = @ImageCreateFromJPEG( $Image_Path ); }
+			IF ( $wmark === False ) { Return False; }
 			
-			$marge_right = $mright;
-			$marge_bottom = $mbottom;
-			$sx = imagesx($wmark);
-			$sy = imagesy($wmark);
+			$Marge_Right = $MRight;
+			$Marge_Bottom = $MBottom;
+			$sx = ImageSX($wmark);
+			$sy = ImageSY($wmark);
 			
-			imagecopy(
-				$image,
+			Imagecopy(
+				$Image,
 				$wmark,
-				//imagesx($image) - $sx - $marge_right,
-				//imagesy($image) - $sy - $marge_bottom,
-				$marge_right,
-				$marge_bottom,
+				//ImageSX($Image) - $sx - $Marge_Right,
+				//ImageSY($Image) - $sy - $Marge_Bottom,
+				$Marge_Right,
+				$Marge_Bottom,
 				0, 0,
-				imagesx($wmark),
-				imagesy($wmark)
+				ImageSX($wmark),
+				ImageSY($wmark)
 			);
 			
-			if ( !empty($new_image_path) ) {
-				imagejpeg($image, $new_image_path);
-			} else {
-				imagejpeg($image, $imageage_path);
+			IF ( !Empty($New_Image_Path) ) {
+				Imagejpeg($Image, $New_Image_Path);
+			} Else {
+				Imagejpeg($Image, $Image_Path);
 			}
 			
-			imagedestroy($image);
+			Imagedestroy($Image);
 		}
 		
-		Public Function Add_Text_Watermark( $img_path, $wm_text ) {
-			$image = $img_path;
+		Public Function Add_Text_Watermark( $img_Path, $wm_text ) {
+			$Image = $img_Path;
 			
-			$newImg = @imagecreatefromjpeg( $image );
-			if ( $image === false ) { $newImg = @imagecreatefrompng( $image ); }
-			if ( $image === false ) { return false; }
+			$newImg = @Imagecreatefromjpeg( $Image );
+			IF ( $Image === False ) { $newImg = @Imagecreatefrompng( $Image ); }
+			IF ( $Image === False ) { Return False; }
 			
 			$fontSize = 5;
 			
 			$xPosition = 10;
 			$yPosition = 10;
 			
-			$fontColor = imagecolorallocate($newImg, 255, 255, 255);
+			$fontColor = Imagecolorallocate($newImg, 255, 255, 255);
 			
-			imagestring($newImg, $fontSize, $xPosition, $yPosition, $wm_text, $fontColor);
+			Imagestring($newImg, $fontSize, $xPosition, $yPosition, $wm_text, $fontColor);
 			
-			imagejpeg($newImg, $img_path);
+			Imagejpeg($newImg, $img_Path);
 			
-			imagedestroy($newImg);
+			Imagedestroy($newImg);
 		}
 		
 		Public Function Build_Indexed_File_Path($Path, $FileName) {
-			if ( substr($Path, -1) == DIRECTORY_SEPARATOR ) {
-				$Path = substr($Path, 0, -1);
+			IF ( SubSTR($Path, -1) == DIRECTORY_SEPARATOR ) {
+				$Path = SubSTR($Path, 0, -1);
 			}
 			
 			$res = $Path . DIRECTORY_SEPARATOR . $FileName;
 			
-			if ( !file_exists($res) ) return $res;
+			IF ( !file_exists($res) ) Return $res;
 			
-			$fnameNoExt = pathinfo($FileName, PATHINFO_FILENAME);
-			$ext = pathinfo($FileName, PATHINFO_EXTENSION);
+			$fnameNoExt = Pathinfo($FileName, PATHINFO_FILENAME);
+			$ext = Pathinfo($FileName, PATHINFO_EXTENSION);
 			
 			$i = 1;
 			while( file_exists($Path . DIRECTORY_SEPARATOR . $fnameNoExt . "_" . $i . '.' . $ext) ) $i++;
 			
-			return $Path . DIRECTORY_SEPARATOR . $fnameNoExt . "_" . $i . '.' . $ext;
+			Return $Path . DIRECTORY_SEPARATOR . $fnameNoExt . "_" . $i . '.' . $ext;
 		}
 		
 		Public Function Build_Token( $String, $build_salt = true ) {
-			if ($build_salt) { $salt = $this->build_token($String, false); } else { $salt = ''; }
+			IF ($build_salt) { $salt = $this->build_token($String, False); } Else { $salt = ''; }
 			$ac = $String;
-			$ac = md5(sha1(base64_encode($ac))) . $salt;
-			$ac = crc32($ac);
-			$ac = str_replace(0, 'x', $ac);
-			return $ac;
+			$ac = MD5(SHA1(Base64_EnCode($ac))) . $salt;
+			$ac = CRC32($ac);
+			$ac = STR_Replace(0, 'x', $ac);
+			Return $ac;
 		}
 		
 		Public Function Check_Len( $String, $min, $max ) {
 			$len = strlen($String);
-			if($len < $min or $len > $max) { return false; } else { return true; }
+			IF ($len < $min or $len > $max) { Return False; } Else { Return true; }
 		}
 		
 		Public Function Get_Remote_Image_Size( $url ) {
@@ -160,16 +160,16 @@
 			$curl_errno = curl_errno( $ch );
 			curl_close( $ch );
 			
-			if ( $http_status != 200 ) {
-				echo 'HTTP Status[' . $http_status . '] Errno [' . $curl_errno . ']';
-				return [0,0];
+			IF ( $http_status != 200 ) {
+				Echo 'HTTP Status[' . $http_status . '] Errno [' . $curl_errno . ']';
+				Return [0,0];
 			}
 			
-			$image = imagecreatefromstring( $data );
-			$dims = [ imagesx( $image ), imagesy( $image ) ];
-			imagedestroy($image);
+			$Image = Imagecreatefromstring( $data );
+			$dims = [ Imagesx( $Image ), Imagesy( $Image ) ];
+			Imagedestroy($Image);
 			
-			return $dims;
+			Return $dims;
 		}
 		
 		Public Function Read_File_To_Array( $File_Path ) {
@@ -189,24 +189,24 @@
 			Return $Res;
 		}
 		
-		Public Function Remove_Char( $string, $char, $rem_with = '' ) {
-			$string = str_replace( $char, $rem_with, $string );
-			return $string;
+		Public Function Remove_Char( $String, $char, $rem_with = '' ) {
+			$String = STR_Replace( $char, $rem_with, $String );
+			Return $String;
 		}
 		
 		Public Function Correct_Iran_Phone($uNumber) {
 			$uNumber = Trim($uNumber);
 			$ret = $uNumber;
 			
-			if (substr($uNumber,0, 3) == '%2B')		{ $ret = substr($uNumber, 3); $uNumber = $ret; }
-			if (substr($uNumber,0, 3) == '%2b')		{ $ret = substr($uNumber, 3); $uNumber = $ret; }
-			if (substr($uNumber,0, 4) == '0098') 	{ $ret = substr($uNumber, 4); $uNumber = $ret; }
-			if (substr($uNumber,0, 3) == '098')		{ $ret = substr($uNumber, 3); $uNumber = $ret; }
-			if (substr($uNumber,0, 3) == '+98')		{ $ret = substr($uNumber, 3); $uNumber = $ret; }
-			if (substr($uNumber,0, 2) == '98') 		{ $ret = substr($uNumber, 2); $uNumber = $ret; }
-			if (substr($uNumber,0, 1) == '0') 		{ $ret = substr($uNumber, 1); }
+			IF (SubSTR($uNumber,0, 3) == '%2B')		{ $ret = SubSTR($uNumber, 3); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 3) == '%2b')		{ $ret = SubSTR($uNumber, 3); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 4) == '0098') 	{ $ret = SubSTR($uNumber, 4); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 3) == '098')		{ $ret = SubSTR($uNumber, 3); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 3) == '+98')		{ $ret = SubSTR($uNumber, 3); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 2) == '98') 		{ $ret = SubSTR($uNumber, 2); $uNumber = $ret; }
+			IF (SubSTR($uNumber,0, 1) == '0') 		{ $ret = SubSTR($uNumber, 1); }
 			
-			return '+98' . $ret;
+			Return '+98' . $ret;
 		}
 		
 		Public Function Rand_Number( $min_num_count = 2, $max_num_count = 4, $min_len = 5, $max_len = 8 ) {
@@ -224,9 +224,9 @@
 			for ( $i = 0; $i < $ncount; $i++ ) {
 				$rnd_num = mt_rand(1, 9);
 				
-				if ( !in_array($rnd_num, $nums) ) {
+				IF ( !in_array($rnd_num, $nums) ) {
 					$nums[] = $rnd_num;
-				} else {
+				} Else {
 					$i--;
 				}
 			}
@@ -236,36 +236,36 @@
 				$out = $out . $nums[$rand_arr];
 			}
 			
-			return $out;
+			Return $out;
 		}
 		
 		Public Function Get_Date_Last_Days($days, $format = 'Y-m-d'){
-			$m = date("m"); $de= date("d"); $y= date("Y");
-			$dateArray = array();
+			$m = Date("m"); $de= Date("d"); $y= Date("Y");
+			$dateArray = Array();
 			for($i = 0; $i <= $days-1; $i++){
-				$dateArray[] = date($format, mktime(0,0,0,$m,($de-$i),$y));
+				$dateArray[] = Date($format, MKTime(0,0,0,$m,($de-$i),$y));
 			}
-			return array_reverse($dateArray);
+			Return Array_Reverse($dateArray);
 		}
 		
-		Public Function Input_Check($Title, $Val, $minL = 1, $maxL = 1, $Is_Num = false, $Is_Mail = false, $Is_Latin = false) {
+		Public Function Input_Check($Title, $Val, $minL = 1, $maxL = 1, $Is_Num = False, $Is_Mail = False, $Is_Latin = False) {
 			$Err_Msg = '';
 			
-			if ( mb_strlen($Val) < $minL ) { $Err_Msg = '- حداقل تعداد کاراکتر فیلد <u>' . $Title . '</u> باید ' . $minL . ' عدد باشد.'; }
+			IF ( MB_strlen($Val) < $minL ) { $Err_Msg = '- حداقل تعداد کاراکتر فیلد <u>' . $Title . '</u> باید ' . $minL . ' عدد باشد.'; }
 			
-			if ( empty($Val) and $Val != '0' ) { $Err_Msg = '- فیلد <u>' . $Title . '</u> نمیتواند خالی باشد.'; }
+			IF ( Empty($Val) and $Val != '0' ) { $Err_Msg = '- فیلد <u>' . $Title . '</u> نمیتواند خالی باشد.'; }
 			
-			if ( mb_strlen($Val) > $maxL ) { $Err_Msg = '- حداکثر تعداد کاراکتر فیلد <u>' . $Title . '</u> باید ' . $maxL . ' عدد باشد.'; }
+			IF ( MB_strlen($Val) > $maxL ) { $Err_Msg = '- حداکثر تعداد کاراکتر فیلد <u>' . $Title . '</u> باید ' . $maxL . ' عدد باشد.'; }
 			
-			if ( !empty($Val) and $Is_Num and !is_numeric($Val) ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> باید از نوع عددی باشد.'; }
+			IF ( !Empty($Val) and $Is_Num and !is_numeric($Val) ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> باید از نوع عددی باشد.'; }
 			
-			if ( !empty($Val) and $Is_Mail and !filter_var($Val, FILTER_VALIDATE_EMAIL) ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> در قالب درست ایمیل نمی باشد.'; }
+			IF ( !Empty($Val) and $Is_Mail and !filter_var($Val, FILTER_VALIDATE_EMAIL) ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> در قالب درست ایمیل نمی باشد.'; }
 			
-			if ( !empty($Val) and $Is_Latin and preg_match("/^[a-zA-Z0-9_]+$/", $Val) != 1 ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> فقط باید شامل اعداد، حروف لاتین و کاراکتر ( _ ) باشد.'; }
+			IF ( !Empty($Val) and $Is_Latin and PREG_Match("/^[a-zA-Z0-9_]+$/", $Val) != 1 ) { $Err_Msg = '- مقدار ورودی فیلد <u>' . $Title . '</u> فقط باید شامل اعداد، حروف لاتین و کاراکتر ( _ ) باشد.'; }
 			
-			if ( !empty($Err_Msg) ) { $Err_Msg .= '<br />'; }
+			IF ( !Empty($Err_Msg) ) { $Err_Msg .= '<br />'; }
 			
-			return $Err_Msg;
+			Return $Err_Msg;
 		}
 		
 		Public Function Rand_Str( $Len = 15 ) {
@@ -287,7 +287,7 @@
 				$rnd_status = rand(1, 3);
 			}
 			
-			return $rnd_str;
+			Return $rnd_str;
 		}
 		
 		Public Function Rand_Num( $Len = 15 ) {
@@ -298,21 +298,21 @@
 				$rnd_num .= chr($temp_int);
 			}
 			
-			return $rnd_num;
+			Return $rnd_num;
 		}
 		
 		Public Function Redirect( $URL ) {
-			if( !headers_sent() ) {
-				header('Location: ' . $URL, true, 302);
-				die();
-			} else {
-				echo '<script type="text/javascript">';
-				echo 'window.location.href="' . $URL . '";';
-				echo '</script>';
-				echo '<noscript>';
-				echo '<meta http-equiv="refresh" content="0;url=' . $URL . '" />';
-				echo '</noscript>';
-				die();
+			IF( !Headers_sent() ) {
+				Header('Location: ' . $URL, true, 302);
+				Die();
+			} Else {
+				Echo '<script type="text/javascript">';
+				Echo 'window.location.href="' . $URL . '";';
+				Echo '</script>';
+				Echo '<noscript>';
+				Echo '<meta http-equiv="refresh" content="0;url=' . $URL . '" />';
+				Echo '</noscript>';
+				Die();
 			}
 		}
 		
@@ -323,11 +323,11 @@
 					<script type="text/javascript">function closethisasap() { document.forms["redirectpost"].submit(); }</script>
 				</head>
 				<body onload="closethisasap();">
-					<form name="redirectpost" method="post" action="<? echo $URL; ?>">
+					<form name="redirectpost" method="post" action="<? Echo $URL; ?>">
 						<?php
 							IF ( !Is_Null($Data) ) {
 								ForEach ($Data as $K => $V) {
-									echo '<input type="hidden" name="' . $K . '" value="' . $V . '" />' . PHP_EOL;
+									Echo '<input type="hidden" name="' . $K . '" value="' . $V . '" />' . PHP_EOL;
 								}
 							}
 						?>
@@ -335,61 +335,61 @@
 				</body>
 			</html>
 		<?php
-			Exit;
+			Exit();
 		}
 		
 		Public Function English_To_Persian_num( $Number ) {
 			$farsi_array = array("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٫");
 			$english_array = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".");
-			return str_replace($english_array, $farsi_array, $Number);
+			Return STR_Replace($english_array, $farsi_array, $Number);
 		}
 		
 		Public Function Persian_To_English_Num( $Number ) {
 			$farsi_array = array("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٫");
 			$english_array = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".");
-			return str_replace($farsi_array, $english_array, $Number);
+			Return STR_Replace($farsi_array, $english_array, $Number);
 		}
 		
-		Public Function Is_Number( $input_string ) {
-			if (!preg_match('/[^0-9]/', $input_string)) {
-				return true;
-			} else {
-				return false;
+		Public Function Is_Number( $Input_String ) {
+			IF (!PREG_Match('/[^0-9]/', $Input_String)) {
+				Return true;
+			} Else {
+				Return False;
 			}
 		}
 		
-		Public Function Clear_Get_Vars( $string, $remove_ls = false ) {
-			$mcode = urldecode($string);
+		Public Function Clear_Get_Vars( $String, $remove_ls = False ) {
+			$mcode = urldecode($String);
 			
-			// remove get vars if exist
+			// remove get vars IF exist
 			$gve = strpos($mcode, '?');
-			if ($gve !== false) {
+			IF ($gve !== False) {
 				$mcode = explode('?', $mcode);
 				$mcode = $mcode[0];
 			}
 			
-			// remove / from last of url if exist
-			if ( substr($mcode, -1) == '/' and $remove_ls == true ) {
-				$mcode = substr($mcode, 0, -1);
+			// remove / from last of url IF exist
+			IF ( SubSTR($mcode, -1) == '/' and $remove_ls == true ) {
+				$mcode = SubSTR($mcode, 0, -1);
 			}
 			
-			return $mcode;
+			Return $mcode;
 		}
 		
 		Public Function Start_Session() {
-			if ( ! $this->Is_Session_Started() ) { @session_start(); }
+			IF ( ! $this->Is_Session_Started() ) { @session_start(); }
 		}
 		
 		Public Function Is_Session_Started() {
-			if ( php_sapi_name() !== 'cli' ) {
-				if ( version_compare(phpversion(), '5.4.0', '>=') ) {
-					return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-				} else {
-					return session_id() === '' ? FALSE : TRUE;
+			IF ( php_sapi_name() !== 'cli' ) {
+				IF ( version_compare(phpversion(), '5.4.0', '>=') ) {
+					Return session_status() === PHP_SESSION_ACTIVE ? TRUE : False;
+				} Else {
+					Return session_id() === '' ? False : TRUE;
 				}
 			}
 			
-			return FALSE;
+			Return False;
 		}
 		
 		Public Function Get_JSON( $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True ) {
@@ -502,129 +502,131 @@
 			Return False;
 		}
 		
-		Public Function Remove_Special_Chars( $in_string, $space_to = false ) {
+		Public Function Remove_Special_Chars( $in_string, $space_to = False ) {
 			$pattern = array('’', '‘', '!', '@', '#', '$', '%', '^', '*', '&', '(', ')', '+', '=', ',', '<', '>', '{', '}', '[', ']', '?', chr(34), chr(92));
-			$res_string = str_replace($pattern, '', $in_string);
+			$res_string = STR_Replace($pattern, '', $in_string);
 			
-			if ( $space_to === true ) { $res_string = str_replace(' ', '+', $res_string); }
+			IF ( $space_to === true ) { $res_string = STR_Replace(' ', '+', $res_string); }
 			
-			return $res_string;
+			Return $res_string;
 		}
 		
-		Public Function Remove_All_Special_Chars( $in_string, $protocols_2 = false ) {
+		Public Function Remove_All_Special_Chars( $in_string, $protocols_2 = False ) {
 			$res_string = preg_replace('/[^A-Za-z0-9\-]/', '', $in_string);
-			if ( $protocols_2 ) {
-				$res_string = str_replace('www', 	'', $res_string);
-				$res_string = str_replace('http', 	'', $res_string);
-				$res_string = str_replace('https', 	'', $res_string);
-				$res_string = str_replace('com', 	'', $res_string);
+			IF ( $protocols_2 ) {
+				$res_string = STR_Replace('www', 	'', $res_string);
+				$res_string = STR_Replace('http', 	'', $res_string);
+				$res_string = STR_Replace('https', 	'', $res_string);
+				$res_string = STR_Replace('com', 	'', $res_string);
 			}
-			return $res_string;
+			Return $res_string;
 		}
 		
 		Public Function Text_Has_String( $Text, $String ) {
-			if (strpos($Text, $String) !== false) {
-				return true;
-			} else {
-				return false;
+			IF (strpos($Text, $String) !== False) {
+				Return true;
+			} Else {
+				Return False;
 			}
 		}
 		
-		Public Function Get_Excerpt( $str, $startPos=0, $maxLength=100, $With_etc = true ) {
-			if(mb_strlen($str) > $maxLength) {
-				if ( $With_etc ) { $maxLength = $maxLength - 3; }
-				$excerpt   = mb_substr($str, $startPos, $maxLength);
-				$lastSpace = mb_strrpos($excerpt, ' ');
-				$excerpt   = mb_substr($excerpt, 0, $lastSpace);
-				if ( $With_etc ) { $excerpt  .= ' ...'; }
-			} else {
-				$excerpt = $str;
+		Public Function Get_Excerpt( $Str, $startPos=0, $maxLength=100, $With_etc = true ) {
+			IF(MB_strlen($Str) > $maxLength) {
+				IF ( $With_etc ) { $maxLength = $maxLength - 3; }
+				$excerpt   = MB_SubSTR($Str, $startPos, $maxLength);
+				$lastSpace = MB_strrpos($excerpt, ' ');
+				$excerpt   = MB_SubSTR($excerpt, 0, $lastSpace);
+				IF ( $With_etc ) { $excerpt  .= ' ...'; }
+			} Else {
+				$excerpt = $Str;
 			}
 			
-			return $excerpt;
+			Return $excerpt;
 		}
 		
-		Public Function Encode( $string ) {
-			$output = rtrim(strtr(base64_encode(gzdeflate($string, 9)), '+/', '-_'), '=');
-			return $output;
+		Public Function Encode( $String ) {
+			$output = rtrim(strtr(base64_encode(gzdeflate($String, 9)), '+/', '-_'), '=');
+			Return $output;
 		}
 		
-		Public Function Decode( $string ) {
-			$output = gzinflate(base64_decode(strtr($string, '-_', '+/')));
-			return $output;
+		Public Function Decode( $String ) {
+			$output = gzinflate(base64_decode(strtr($String, '-_', '+/')));
+			Return $output;
 		}
 		
-		Public Function Load_JS( $js_path ) {
-			if (!empty($js_path)) {
-				echo chr(9) . chr(9) . '<script type="text/javascript" src="' . $js_path . '" charset="UTF-8" ></script>';
-				echo chr(13);
+		Public Function Load_JS( $js_Path ) {
+			IF (!Empty($js_Path)) {
+				Echo chr(9) . chr(9) . '<script type="text/javascript" src="' . $js_Path . '" charset="UTF-8" ></script>';
+				Echo chr(13);
 			}
 		}
 		
-		Public Function Load_CSS( $css_path ) {
-			if (!empty($css_path)) {
-				echo chr(9) . chr(9) . '<link rel="stylesheet" type="text/css" href="' . $css_path . '">';
-				echo chr(13);
+		Public Function Load_CSS( $css_Path ) {
+			IF (!Empty($css_Path)) {
+				Echo chr(9) . chr(9) . '<link rel="stylesheet" type="text/css" href="' . $css_Path . '">';
+				Echo chr(13);
 			}
 		}
 		
-		function Load_File( $file_path, $show_message = true ) {
-			if ( file_exists( $file_path ) ) {
-				require_once( $file_path );
-				return true;
-			} else {
-				if ( $show_message ) { echo '<h4><font color="red">Missing File : </font><strong>' . $file_path . '</strong></h4>'; }
-				return false;
+		function Load_File( $file_Path, $show_message = true ) {
+			IF ( file_exists( $file_Path ) ) {
+				require_once( $file_Path );
+				Return true;
+			} Else {
+				IF ( $show_message ) { Echo '<h4><font color="red">Missing File : </font><strong>' . $file_Path . '</strong></h4>'; }
+				Return False;
 			}
 		}
 		
 		Public Function Set_Cookie( $Cookie_Name, $Cookie_Value, $Cookie_Days = '30' ) {
-			Return @setcookie( $Cookie_Name, $Cookie_Value, strtotime('+' . $Cookie_Days . ' day'), "/" );
+			Return @SetCookie( $Cookie_Name, $Cookie_Value, strtotime('+' . $Cookie_Days . ' day'), "/" );
 		}
 		
 		Public Function Delete_Cookie( $Cookie_Name ) {
-			Return @setcookie( $Cookie_Name, null, strtotime('-1 day'), "/" );
+			Return @SetCookie( $Cookie_Name, Null, strtotime('-1 day'), "/" );
 		}
 		
 		Public Function Get_URL_FileName( $URL ) {
-			$fname = parse_url($URL, PHP_URL_PATH);
-			Return basename($URL);
+			$fname = Parse_URL($URL, PHP_URL_PATH);
+			Return BaseName($URL);
 		}
 		
 		Public Function Download_Remote_File( $Remote_File, $Local_Path ) {
-			set_time_limit(1200);
-			ini_set('max_execution_time', '1200');
+			Set_Time_Limit(1200);
+			INI_Set('max_execution_time', '1200');
 			
-			$fp = fopen($Local_Path, 'w+');
-			$ch = curl_init($Remote_File);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-			curl_setopt($ch, CURLOPT_FILE, $fp);
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 1200);
+			$Remote_File = RawURLEncode($Remote_File);
+			$Remote_File = STR_Replace('%3A', ':', STR_Replace('%2F', '/', $Remote_File));
 			
-			curl_exec($ch);
-			if ( curl_errno($ch) ) {
-				echo curl_error($ch);
-				$res = false;
-			} else {
-				$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-				if ($resultStatus == 200) {
-					if ( file_exists($Local_Path) ) {
-						$res = true;
-					} else {
-						$res = false;
+			$FP = FOpen($Local_Path, 'w+');
+			$CH = CURL_INIT($Remote_File);
+			CURL_SetOpt($CH, CURLOPT_TIMEOUT, 0);
+			CURL_SetOpt($CH, CURLOPT_FILE, $FP);
+			CURL_SetOpt($CH, CURLOPT_FOLLOWLOCATION, True);
+			CURL_SetOpt($CH, CURLOPT_TIMEOUT, 1200);
+			
+			CURL_exec($CH);
+			IF ( CURL_ErrNo($CH) ) {
+				$Res = False;
+			} Else {
+				$resultStatus = CURL_GetInfo($CH, CURLINFO_HTTP_CODE);
+				IF ($resultStatus == 200) {
+					IF ( File_Exists($Local_Path) ) {
+						$Res = True;
+					} Else {
+						$Res = False;
 					}
-				} else {
-					$res = false;
+				} Else {
+					$Res = False;
 				}
 			}
-			curl_close($ch);
-			fclose($fp);
+			CURL_Close($CH);
+			FClose($FP);
 			
-			return $res;
+			Return $Res;
 		}
 		
-		Public Function Miladi_To_Shamsi( $gy, $gm, $gd, $mod='', $time2 = false, $leading_zero = false ) {
+		Public Function Miladi_To_Shamsi( $gy, $gm, $gd, $mod='', $time2 = False, $leading_zero = False ) {
 			$g_d_m = array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
 			$jy = ($gy <= 1600) ? 0 : 979;
 			$gy -= ($gy <= 1600) ? 621 : 1600;
@@ -635,22 +637,22 @@
 			$jy += 4 * ((int)($days / 1461));
 			$days %= 1461;
 			$jy += (int)(($days - 1) / 365);
-			if($days > 365) $days = ($days - 1) % 365;
+			IF($days > 365) $days = ($days - 1) % 365;
 			$jm = ($days < 186) ? 1 + (int)($days / 31) : 7 + (int)(($days - 186) / 30);
 			$jd = 1 + (($days < 186) ? ($days % 31) : (($days - 186) % 30));
 			
-			if ( $leading_zero ) {
+			IF ( $leading_zero ) {
 				$jm = sprintf("%02d", $jm);
 				$jd = sprintf("%02d", $jd);
 			}
 			
-			if ($mod != '') {
+			IF ($mod != '') {
 				$resret = $jy . $mod . $jm . $mod . $jd;
-			} else {
+			} Else {
 				$resret = array( $jy, $jm, $jd );
 			}
 			
-			if ($time2) {
+			IF ($time2) {
 				$resret .= ' ' . date('H:i:s');
 			}
 			
