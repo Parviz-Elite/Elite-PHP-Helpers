@@ -26,14 +26,14 @@
 		Get_Shamsi_Date 		=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
 		Get_URL_FileName 		=> $URL
 		Input_Check			=> $Title, $Val, $minL = 1, $maxL = 1, $Is_Num = False, $Is_Mail = False, $Is_Latin = False
-		Is_Json				=> $String
+		Is_Json			=> $String
 		Is_Number 			=> $Input_String
 		Is_Session_Started		=> Null
 		Load_CSS 			=> $css_Path
 		Load_File 			=> $file_Path, $show_message = true
 		Load_JS 			=> $js_Path
 		Miladi_To_Shamsi 		=> $gy, $gm, $gd, $mod='', $time2 = False, $leading_zero = False
-		English_To_Persian_num		=> $Number
+		English_To_Persian_num	=> $Number
 		Post_Redirect			=> $URL, $Data = []
 		Post_Request			=> $URL, $Data, $Is_JSON = False, $Extra_HTTP_Headers = []
 		Rand_Num			=> $Len
