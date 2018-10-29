@@ -16,14 +16,14 @@
 		Decode 			=> $String
 		Delete_Cookie			=> $Cookie_Name
 		Download_Remote_File 		=> $Remote_File, $Local_Path
-		Encode 				=> $String
-		Persian_To_English_Num		=> $Number
+		ncode 				=> $String
+		Persian_To_English_Num	=> $Number
 		Get_Date_Last_Days		=> $days, $format = 'Y-m-d'
 		Get_Content 			=> $URL, $Using = 'CURL', $URL_Decode = True
 		Get_Excerpt 			=> $Str, $startPos=0, $maxLength=100, $With_etc = true
 		Get_JSON 			=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
 		Get_Remote_Image_Size		=> $URL
-		et_Shamsi_Date 			=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
+		Get_Shamsi_Date 		=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
 		Get_URL_FileName 		=> $URL
 		Input_Check			=> $Title, $Val, $minL = 1, $maxL = 1, $Is_Num = False, $Is_Mail = False, $Is_Latin = False
 		Is_Json				=> $String
