@@ -6,22 +6,22 @@
 		* Version	: 4.7.0
 		
 		
-		Add_Image_WaterMark			=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
-		Add_Text_Watermark			=> $img_Path, $wm_text
+		Add_Image_WaterMark		=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
+		Add_Text_Watermark		=> $img_Path, $wm_text
 		Build_Indexed_File_Path		=> $Path, $FileName
-		Build_Token 				=> $String, $build_salt = true
-		Check_Len					=> $String, $min, $max
-		Clear_Get_Vars 				=> $string, $remove_ls = False
-		Correct_Iran_Phone			=> $uNumber
-		Decode 						=> $String
-		Delete_Cookie				=> $Cookie_Name
+		Build_Token 			=> $String, $build_salt = true
+		Check_Len			=> $String, $min, $max
+		Clear_Get_Vars 			=> $string, $remove_ls = False
+		Correct_Iran_Phone		=> $uNumber
+		Decode 				=> $String
+		Delete_Cookie			=> $Cookie_Name
 		Download_Remote_File 		=> $Remote_File, $Local_Path
-		Encode 						=> $String
+		Encode 				=> $String
 		Persian_To_English_Num		=> $Number
-		Get_Date_Last_Days			=> $days, $format = 'Y-m-d'
-		Get_Content 				=> $URL, $Using = 'CURL', $URL_Decode = True
-		Get_Excerpt 				=> $Str, $startPos=0, $maxLength=100, $With_etc = true
-		Get_JSON 					=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
+		Get_Date_Last_Days		=> $days, $format = 'Y-m-d'
+		Get_Content 			=> $URL, $Using = 'CURL', $URL_Decode = True
+		Get_Excerpt 			=> $Str, $startPos=0, $maxLength=100, $With_etc = true
+		Get_JSON 			=> $URL, $Using = 'CURL', $In_Array = False, $URL_Decode = True
 		Get_Remote_Image_Size		=> $URL
 		Get_Shamsi_Date 			=> $MOD = DIRECTORY_SEPARATOR, $Time2 = False, $Leading_zero = True
 		Get_URL_FileName 			=> $URL
