@@ -8,7 +8,7 @@
 		
 		Add_Image_WaterMark		=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
 		Add_Text_Watermark		=> $img_Path, $wm_text
-		Build_Indexed_File_Path		=> $Path, $FileName
+		Build_Indexed_File_Path	=> $Path, $FileName
 		Build_Token 			=> $String, $build_salt = true
 		Check_Len			=> $String, $min, $max
 		Clear_Get_Vars 			=> $string, $remove_ls = False
