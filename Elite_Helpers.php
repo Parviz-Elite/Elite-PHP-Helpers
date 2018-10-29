@@ -5,7 +5,7 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.8.0
+		* Version	: 4.9.0
 		
 		
 		Add_Image_WaterMark			=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
@@ -595,8 +595,10 @@
 			Set_Time_Limit(1200);
 			INI_Set('max_execution_time', '1200');
 			
-			$Remote_File = RawURLEncode($Remote_File);
-			$Remote_File = STR_Replace('%3A', ':', STR_Replace('%2F', '/', $Remote_File));
+			IF( StrLen($Remote_File) != MB_StrLen($Remote_File, 'utf-8') ) { 
+				$Remote_File = RawURLEncode($Remote_File);
+				$Remote_File = STR_Replace('%3A', ':', STR_Replace('%2F', '/', $Remote_File));
+			}
 			
 			$FP = FOpen($Local_Path, 'w+');
 			$CH = CURL_INIT($Remote_File);
