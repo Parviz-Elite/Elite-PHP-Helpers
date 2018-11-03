@@ -5,7 +5,7 @@
 		* Author	: Parviz-Turk
 		* Email 	: Parviz@HackerMail.com - Parviz@Engineer.com
 		* Web		: http://Parviz.id.ir/
-		* Version	: 4.9.0
+		* Version	: 4.9.1
 		
 		
 		Add_Image_WaterMark			=> $Image_Path, $WaterMark_Path, $New_Image_Path = '', $MRight = 0, $MBottom = 10
@@ -600,11 +600,14 @@
 				$Remote_File = STR_Replace('%3A', ':', STR_Replace('%2F', '/', $Remote_File));
 			}
 			
+			$User_Agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0';
+			
 			$FP = FOpen($Local_Path, 'w+');
 			$CH = CURL_INIT($Remote_File);
-			CURL_SetOpt($CH, CURLOPT_TIMEOUT, 0);
 			CURL_SetOpt($CH, CURLOPT_FILE, $FP);
 			CURL_SetOpt($CH, CURLOPT_FOLLOWLOCATION, True);
+			CURL_SetOpt($CH, CURLOPT_USERAGENT, $User_Agent);
+			CURL_SetOpt($CH, CURLOPT_CONNECTTIMEOUT, 120);
 			CURL_SetOpt($CH, CURLOPT_TIMEOUT, 1200);
 			
 			CURL_exec($CH);
